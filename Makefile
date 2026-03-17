@@ -1,4 +1,4 @@
-CXX = ccache g++
+CXX = g++
 CXXFLAGS = -O0 -g -Wall -std=c++17
 
 SOURCES = main.cpp \

@@ -1,4 +1,7 @@
 #include <iostream>
+#include <string>
+#include <ctime>
+#include <cstdlib>
 #include "hexer.h"
 #include <unistd.h>
 #include <sstream>
@@ -54,6 +57,7 @@ void Hexer::CLI(){
             break;
         default:
             cerr << "\033[31mInvalid number\033[0m" << endl;
+            sleep(1);
             break; 
     }
             
@@ -87,7 +91,7 @@ void Hexer::Wordlists_generator::saveWordlist(){
     cout << "[?]Enter the name of the file(no extension): ";
     getline(cin, fileName);
 
-    string fullPath = "/home/malloc/Documents/infos/wordlists" + fileName + ".txt";
+    string fullPath = "wordlists/" + fileName + ".txt";
 
     ofstream file(fullPath);
 
@@ -122,7 +126,7 @@ void Hexer::Passwords_generator::makePasswords(){
     cout << "[?]Enter the length of the password: ";
     cin >> length;
 
-    srand(time(0));
+    srand(time(NULL));
 
     //use of password
     cin.ignore();
@@ -136,7 +140,7 @@ void Hexer::Passwords_generator::makePasswords(){
     
 }
 void Hexer::Passwords_generator::savePassword(){
-    ofstream file("/home/malloc/Documents/infos/passwords.txt", ios::app);
+    ofstream file("passwords.txt", ios::app);
     file << use << ": " << password << endl;
     file.close();
     cout << "\033[92m[+] Your password has been saved successfully in passwords folder.\033[0m" << endl;
@@ -177,7 +181,7 @@ void Hexer::Numbers_generator::Save_Numbers(){
     cout << "[?] Enter the name of the file (no extention): ";
     cin >> filename;
 
-    string path = "/home/malloc/Documents/infos/wordlists/" + filename + ".txt";
+    string path = "wordlists/" + filename + ".txt";
 
     ofstream file(path);
     if(!file.is_open()){
