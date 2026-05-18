@@ -7,6 +7,7 @@
 #include <sstream>
 #include <fstream>
 #include <limits>
+#include <filesystem>
 
 
 using namespace std;
@@ -174,17 +175,20 @@ void Hexer::Numbers_generator::create_numbers(){
         num = string(padding , '0') + num;
         numbers.push_back(num);
     }
-    cout << "[+] Numbers generated successefully!";
+    cout << "[+] Numbers generated successefully!" << endl;
 }
 void Hexer::Numbers_generator::Save_Numbers(){
     string filename;
     cout << "[?] Enter the name of the file (no extention): ";
     cin >> filename;
 
+    filesystem::create_directory("wordlists");
+
     string path = "wordlists/" + filename + ".txt";
 
     ofstream file(path);
     if(!file.is_open()){
+        
         cerr << "[-] Cant open file.";
         return;
     }
@@ -192,7 +196,7 @@ void Hexer::Numbers_generator::Save_Numbers(){
         file << num << endl;
     }
     file.close();
-    cout << "[+] The wordlist has been saved successfully!";
+    cout << "[+] The wordlist has been saved successfully!" << endl;
 }
 void Hexer::Numbers_generator::Nums_run(){
     takeInput();

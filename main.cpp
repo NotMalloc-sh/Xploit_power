@@ -33,6 +33,8 @@ int main(){
     Hexer hexer;
     Stry stry;
     Bony_Stony bs;
+
+    sleep(1);
     
     while(run){
         bool toolrun = false;
@@ -77,7 +79,7 @@ int main(){
                 toolrun = true;
                 break;
             case 99:
-                cout << "exiting.." << endl;
+                cout << "\033[31m[!]exiting..\033[0m" << endl;
                 run = false;
                 break;
 
@@ -94,6 +96,7 @@ int main(){
                 run = false;
                 
             }
+            cout << "\033[31m[!]exiting..\033[0m" << endl;
             
             sleep(1);
             

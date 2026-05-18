@@ -9,8 +9,7 @@ using namespace std;
 
 Aegis::Aegis(){
     commands = {"whoami", 
-                "sudo ss -tuln",    
-                "sudo ufw status", 
+                "sudo ss -tuln", 
                 "cat /etc/os-release"
     };
 }
