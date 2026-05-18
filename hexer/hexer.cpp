@@ -92,6 +92,8 @@ void Hexer::Wordlists_generator::saveWordlist(){
     cout << "[?]Enter the name of the file(no extension): ";
     getline(cin, fileName);
 
+    filesystem::create_directory("wordlists");
+
     string fullPath = "wordlists/" + fileName + ".txt";
 
     ofstream file(fullPath);

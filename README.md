@@ -4,21 +4,21 @@ A powerful C++ cybersecurity toolkit created by Xpl01t to help ethical hackers l
 
 ## Tools Overview
 
-  **Dread**  Brute force Tool:
+  **Dread**:
   Perform password cracking with customizable wordlists.
 
-  **Stry**  the Scanner:  
+  **Stry**:  
   Quickly scan target IPs for open ports and services.
   New features soon..
 
-  **Hexer**  The Generator:
+  **Hexer**:
   Generate custom wordlists based on patterns and rules for Dread.
   And also generate password with costume length and use.
 
-  **Aegis**  Cyber Defense Tool: 
+  **Aegis**: 
   Detect and block suspicious network activities to protect systems.
 
-  **Bony & Stony**   Reverse Shell Generator:
+  **Bony & Stony**:
   Create reverse shells for secure remote access during penetration tests.
 
 ##  Installation - FOR LINUX
