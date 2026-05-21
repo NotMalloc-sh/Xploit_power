@@ -34,7 +34,7 @@ void Dread::banner() {
 void Dread::loadWordlists() {
     cout << "[?]Enter the target URL : ";
     cin >> targetURL;
-
+    //get user and pass wordlists
     string user, pass;
     cout << "[+]Enter the path of usernames wordlist: ";
     cin >> user;
@@ -47,6 +47,7 @@ void Dread::loadWordlists() {
     ifstream uFile(user), pFile(pass);
     string line;
 
+    //check if the wordlists exist
     if (!uFile.is_open() || !pFile.is_open()) {
         cerr << "[-]Can't open one of the wordlists." << endl;
         return;
