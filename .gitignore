@@ -19,6 +19,6 @@ bin/
 .DS_Store
 .vscode/
 .idea/
-wordlists/*
+
 
 passwords.txt
