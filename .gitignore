@@ -19,6 +19,7 @@ bin/
 .DS_Store
 .vscode/
 .idea/
-
+wordlists/*
+!wordlists/.gitkeep
 
 passwords.txt
