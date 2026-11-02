@@ -25,7 +25,7 @@ A powerful C++ cybersecurity toolkit created by Xpl01t to help ethical hackers l
 ```bash
 git clone https://github.com/NotMalloc-sh/Xploit_power.git
 cd Xploit_power
-chmod +x run.sh
+chmod +x run
 ./run
 ```
 
