@@ -1,4 +1,4 @@
-run
+
 xploit
 main.o
 aegis/aegis.o
@@ -19,5 +19,6 @@ bin/
 .DS_Store
 .vscode/
 .idea/
-wordlists
+wordlists/*
+
 passwords.txt

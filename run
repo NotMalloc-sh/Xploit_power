@@ -1,0 +1,10 @@
+g++ -std=c++17 -O0 -g -Wall -pthread \
+main.cpp \
+dread/dread.cpp \
+stry/stry.cpp \
+hexer/hexer.cpp \
+aegis/aegis.cpp \
+Bony_Stony/bony_stony.cpp \
+-o xploit -lcurl
+
+./xploit
