@@ -66,10 +66,12 @@ void Hexer::CLI(){
 void Hexer::Wordlists_generator::takeWords(){
     words.clear();
 
+    //get input
     string input;
     cout << "[?]Enter words (anything, space seperated): ";
     getline(cin, input);
 
+    //seperate words by space
     stringstream ss(input);
     string token;
     while (ss >> token){
@@ -121,7 +123,7 @@ void Hexer::Wordlists_generator::Wordlists_runner(){
 void Hexer::Passwords_generator::makePasswords(){
     static const char randNum[] = 
     "0123456789"
-    "./*@#&$"
+    "./*@#&$()[]{}<>"
     "abcdefghijklmnopqrstuvwxyz"
     "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
@@ -146,7 +148,7 @@ void Hexer::Passwords_generator::savePassword(){
     ofstream file("passwords.txt", ios::app);
     file << use << ": " << password << endl;
     file.close();
-    cout << "\033[92m[+] Your password has been saved successfully in passwords folder.\033[0m" << endl;
+    cout << "\033[92m[+] Your password has been saved successfully in passwords file.\033[0m" << endl;
 }
 void Hexer::Passwords_generator::Pass_run(){
     makePasswords();
@@ -173,6 +175,7 @@ void Hexer::Numbers_generator::create_numbers(){
     for(int i = 0; i < max; i++){
         string num = to_string(i);
         int padding = length - num.length();
+        //add zeros to the left of number
         if (padding < 0) padding = 0;
         num = string(padding , '0') + num;
         numbers.push_back(num);
@@ -186,14 +189,17 @@ void Hexer::Numbers_generator::Save_Numbers(){
 
     filesystem::create_directory("wordlists");
 
+    //set path
     string path = "wordlists/" + filename + ".txt";
 
+    //open file
     ofstream file(path);
     if(!file.is_open()){
         
         cerr << "[-] Cant open file.";
         return;
     }
+    //save
     for( auto& num : numbers){
         file << num << endl;
     }

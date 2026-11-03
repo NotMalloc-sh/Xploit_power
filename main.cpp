@@ -34,7 +34,7 @@ int main(){
     Stry stry;
     Bony_Stony bs;
 
-    sleep(1);
+    //sleep(1);
     
     while(run){
         bool toolrun = false;

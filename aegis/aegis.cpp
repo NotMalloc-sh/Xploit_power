@@ -97,11 +97,11 @@ void Aegis::showOutput() {
     cout << "======================" << endl;
     cout << "   System checkup     " << endl;
     cout << "======================" << "\033[0m" << endl;
-    /*for(int i = 0; i <= results.size() ; i++) {
+    for(int i = 0; i < results.size() ; i++) {
         cout << "[" << commands[i] <<"]" << endl;
         cout << results[i] << endl;
         cout << "------------------------------------" << endl;
-    }*/
+    }
     
     //cout << "You are :" << whoami << endl;
 }
