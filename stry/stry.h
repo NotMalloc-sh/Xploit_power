@@ -7,6 +7,7 @@
 
 class Stry {
     private:
+    
         std::string ip;
         std::vector<int> ports;
         std::map<int, std::string> services;

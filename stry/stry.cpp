@@ -54,62 +54,78 @@ void Stry::takeIp(){
 }
 
 void Stry::scanPort(int port){  
-            
+
+    //declare socket        
     int sock = socket(AF_INET, SOCK_STREAM, 0);
+    //check if socket creation was successful
     if(sock < 0){
         cerr << "[-]Sock creating failed." << endl;
     }
+    
+    //set up address structure for ip and port
+    sockaddr_in addr{};
+    addr.sin_family = AF_INET;
+    addr.sin_port = htons(port);
+    inet_pton(AF_INET, ip.c_str(), &addr.sin_addr);
 
-        sockaddr_in addr{};
-        addr.sin_family = AF_INET;
-        addr.sin_port = htons(port);
-        inet_pton(AF_INET, ip.c_str(), &addr.sin_addr);
+    //check if ip address is valid
+    if(inet_pton(AF_INET, ip.c_str(), &addr.sin_addr) <= 0){
+        cerr << "\033[31m[-]Invalid IP address format.\033[0m" << endl;
+        return;
+    }
 
-        if(inet_pton(AF_INET, ip.c_str(), &addr.sin_addr) <= 0){
-            cerr << "\033[31m[-]Invalid IP address format.\033[0m" << endl;
-            return;
-        }
+    //set timeout for socket connection
+    struct timeval timeout;
+    timeout.tv_sec = 1;
+    timeout.tv_usec = 0;
+    setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
 
-        struct timeval timeout;
-        timeout.tv_sec = 1;
-        timeout.tv_usec = 0;
-        setsockopt(sock, SOL_SOCKET, SO_RCVTIMEO, (char *)&timeout, sizeof(timeout));
+    //attempt to connect to the port
+    int result = connect(sock, (sockaddr*)&addr, sizeof(addr));
+    
+    //check if its open or closed
+    string status = (result == 0)? "open" : "closed";
+    //version of port
+    string version = "";
 
-        int result = connect (sock, (sockaddr*)&addr, sizeof(addr));
+    //if port is open, get the version
+    if(status == "open"){
+        char buffer[1024] = {0};
+        recv(sock, buffer, sizeof(buffer), 0);
+        version = string(buffer);
         
+    }
 
-        string status = (result == 0)? "open" : "closed";
-        string version = "";
-
-        if(status == "open"){
-            char buffer[1024] = {0};
-            recv(sock, buffer, sizeof(buffer), 0);
-            version = string(buffer);
-            
-        }
-
-        Lock lock(mtx);
-        results.push_back({port, status, version});
-        close(sock);
+    //lock the mutex and push the result to results vector
+    Lock lock(mtx);
+    //push port, status and version
+    results.push_back({port, status, version});
+    close(sock);
         
 }
 
 void Stry::scanPorts(){
+    //set timer
     auto start = chrono::steady_clock::now();
     cout << "[*]Scanning " << ip << ".." << endl;
 
+    //set threads vector to hold threads for each port
     vector<thread> threads;
 
+    //scan all ports
     for(int port : ports){
         threads.emplace_back(&Stry::scanPort, this, port);
         this_thread::sleep_for(chrono::milliseconds(10));
     }
 
+    //join all threads
     for(auto& t : threads){
         t.join();
     }
 
+    //sort results by port number
     sort(results.begin(), results.end());
+
 
     for(const auto& [port, status, version] : results){
         string color = (status == "open") ? "\033[32m" : "\033[31m";
@@ -125,7 +141,7 @@ void Stry::scanPorts(){
         cout << "\033[0m";
     }
 
-
+    //end timer and calculate duration
     auto end = chrono::steady_clock::now();
     auto duration_ms = chrono::duration_cast<chrono::milliseconds>(end - start).count();
 
